@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movie Rental{% endblock %}
+
+{% block body %}
+    {% include('partials/navbaruser.html.twig') %}
+
+    <br>
+
+    <div class="example-wrapper">
+
+        {% for message in app.flashes('success') %}
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <div class="header">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <h1 style="text-align: center">Rent Movie</h1>
+
+        {{ form_start(RentalForm, {'attr':
+            {
+                'class': 'ui form',
+                'novalidate': 'novalidate'
+            }
+        }
+        ) }}
+        <p>{{ movie.title }}</p>
+{#        <a class="ui image label">#}
+{#            {{ movie.title }}#}
+{#        </a>#}
+
+        {% for field in RentalForm.children %}
+            {% if field.vars.name != '_token' %}
+
+                <div class="field">
+                    {{ form_label(field) }}
+                    {{ form_widget(field) }}
+                    {{ form_errors(field) }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <button class="ui teal basic button" type="submit">Rent Movie</button>
+
+        {{ form_end(RentalForm) }}
+    </div>
+
+{% endblock %}

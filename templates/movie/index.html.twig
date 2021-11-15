@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Movie{% endblock %}
+
+{% block body %}
+    {% include('partials/navbaradmin.html.twig') %}
+    <div class="example-wrapper">
+
+        <h1 style="text-align: center">New Movie</h1>
+        {% for message in app.flashes('success') %}
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <div class="header">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
+        {{ form_start(MovieForm, {'attr':
+            {
+                'class': 'ui form',
+            'novalidate': 'novalidate'
+            }
+        }
+        ) }}
+
+        {% for field in MovieForm.children %}
+            {% if field.vars.name != '_token' %}
+                <div class="field">
+                    {{ form_label(field) }}
+                    {{ form_widget(field) }}
+                    {{ form_errors(field) }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <button class="ui teal basic button" type="submit">Create</button>
+
+        {{ form_end(MovieForm) }}
+    </div>
+{% endblock %}

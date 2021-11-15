@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% include('partials/navbar.html.twig') %}
+
+    <h1 style="text-align: center">Register</h1>
+
+    <div class="example-wrapper">
+
+        {% for message in app.flashes('success') %}
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <div class="header">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="ui form">
+            {{ form_start(registrationForm, {
+                'attr': {
+                    'novalidate': 'novalidate',
+                }
+            }) }}
+            {{ form_row(registrationForm.firstname) }}&nbsp
+            {{ form_row(registrationForm.lastname) }}&nbsp;
+            {{ form_row(registrationForm.username) }}&nbsp;
+            {{ form_row(registrationForm.password, {
+                label: 'Password'
+            }) }}&nbsp;
+
+            <br>
+            <button class="ui primary button" type="submit">Register</button>
+
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

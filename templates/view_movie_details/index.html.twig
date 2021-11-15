@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Movie{% endblock %}
+
+{% block body %}
+    {% include('partials/navbaruser.html.twig') %}
+
+    <div class="container" style="margin: auto;">
+        <div class="ui segment">
+            <div class="row">
+                <div style="margin-left: 25%" class="column image">
+                    <img src="{{ asset('uploads/poster/' ~ data.poster) }}" width="50%">
+                </div>
+
+                <div class="ui divider"></div>
+                <div class="meta">
+                    <p style="text-align: center;" class="category"> {{ data.title }}</p>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ data.category.name }}</span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ data.releasedDate.format('d/m/Y') }}</span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ data.producer }}</span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="description">
+                    <p> {{ data.description }}</p>
+                </div>
+                <br>
+
+                <div>
+                    <a href="{{ path('rental', {id: data.id}) }}">
+                        <button style="width: 100%;" class="ui primary button">Rent Movie</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

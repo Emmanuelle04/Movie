@@ -1,0 +1,25 @@
+<div class="container1">
+        <div class="ui special cards">
+            {% for x in data %}
+                <div class="card">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <div class="ui inverted button">
+                                        <a class="header" href="{{ path('view_movie_details', {id: x.id}) }}">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="{{ asset('uploads/poster/' ~ x.poster) }}">
+                    </div>
+                    <div class="content">
+                        <p class="header">{{ x.title }}</p>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+

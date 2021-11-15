@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Movie{% endblock %}
+
+{% block body %}
+    {% include('partials/navbaradmin.html.twig') %}
+
+    <div class="container" style="margin: auto;">
+        <div class="ui segment">
+            <div class="row">
+                <div style="margin-left: 25%" class="column image">
+                    <img src="{{ asset('uploads/poster/' ~ result.poster) }}" width="50%">
+                </div>
+
+                <div class="ui divider"></div>
+                <div class="meta">
+                    <p style="text-align: center;" class="category"> {{ result.title }}</p>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ result.category.name }}</span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ result.releasedDate.format('d/m/Y') }}</span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ result.producer }}</span>
+                </div>
+
+                <div class="ui divider"></div>
+
+                <div class="description">
+                    <p> {{ result.description }}</p>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

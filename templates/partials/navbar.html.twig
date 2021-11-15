@@ -1,0 +1,43 @@
+<div class="ui secondary menu">
+    <a class="active item" href="{{ path('home') }}">
+        Home
+    </a>
+
+    <a class="active item" href="{{ path('app_login') }}">
+        Login
+    </a>
+
+    <a class="active item" href="{{ path('movie') }}">
+        New Movie
+    </a>
+
+    <div class="ui simple dropdown item">
+        <div class="text">User</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <div href="{{ path('app_register') }}" class="item">Register</div>
+            <div href="{{ path('app_login') }}" class="item">Log In</div>
+        </div>
+    </div>
+
+    <div class="ui simple dropdown item">
+        <div class="text">Movie</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <div href="{{ path('movie') }}" class="item">New</div>
+            <div href="{{ path('view_movie') }}" class="item">List</div>
+        </div>
+    </div>
+
+    <div class="right menu">
+        <div class="item">
+            <div class="ui transparent icon input">
+                <input type="text" id="search" placeholder="Search...">
+                <i id="searchbtn" class="search link icon"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

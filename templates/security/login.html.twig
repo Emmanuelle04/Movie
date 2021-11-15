@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block body %}
+    {% include('partials/navbar.html.twig') %}
+    <div class="ui segment" style="width:30%; margin:auto; margin-top: 5%">
+        <form class="ui form" method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+{#            {% if app.user %}#}
+{#                <div class="mb-3">#}
+{#                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>#}
+{#                </div>#}
+{#            {% endif %}#}
+
+            <h1 class="login">Sign in</h1>
+
+            <label for="inputUsername">Username</label>
+            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control"
+                   autocomplete="username" required autofocus>
+
+            <br>
+            <br>
+
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control"
+                   autocomplete="current-password"
+                   required>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <br>
+            <br>
+
+            <button style="width: 100%;" id="login_btn" class="ui button" type="submit">Sign In</button>
+        </form>
+
+        <br>
+
+        <a href="{{ path('app_register') }}">
+            <button style="width: 100%;" class="ui primary button">Not yet registered?</button>
+        </a>
+
+    </div>
+{% endblock %}

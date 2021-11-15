@@ -1,0 +1,45 @@
+.example-wrapper {
+    margin: 10px auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+}
+
+.example-wrapper code {
+    background: #F5F5F5;
+    padding: 2px 6px;
+}
+
+.ui.simple.dropdown.item {
+    background: grey;
+}
+
+.ui.segment{
+    margin: 40px 40px 40px 40px;
+    border: 1px;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.ui.card {
+    display: inline-block;
+}
+
+.container{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.ui.card{
+    padding: 50px;
+}
+
+.container1{
+    margin: 100px;
+}
+
+.login{
+    alignment: center;
+}
+
+
