@@ -32,7 +32,23 @@ $('#searchbtn')
             }
         });
 
-    });
+    })
 
+$('#searchicon')
+    .on('click', function () {
+        var searchMovie = $(this).prev('#searchtitle').val();
+        console.log(searchMovie);
 
+        // $.ajax({
+        //     type: "POST",
+        //     url: "/api",
+        //     data: {search: searchMovie},
+        //     success: function (response) {
+        //         console.log(response);
+        //     },
+        //     error: function (response) {
+        //         console.log(response);
+        //     }
+        // });
 
+    })

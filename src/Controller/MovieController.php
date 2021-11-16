@@ -78,7 +78,7 @@ class MovieController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Movie Edited!');
-            header("refresh:5");
+            header("refresh:5;");
         }
 
         return $this->render('movie/editmovie.html.twig', array(

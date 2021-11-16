@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,24 +13,60 @@ use GuzzleHttp\Client;
 
 class ApiController extends AbstractController
 {
+//    define constant
+    const TOKEN = "1bbadff0";
+    const URI = "http://www.omdbapi.com";
+
     /**
      * @Route("/api", name="api")
+     * @param Request $request
+     * @return Response
      * @throws GuzzleException
      */
-    public function getMovie(): Response
+    public function getMovie(Request $request): Response
     {
-        // http://www.omdbapi.com/?apikey=[1bbadff0]&
+//        $searchMovie = $request->get('search');
+        $searchMovie = "the+witcher";
+
         // Create a client with a base URI (uniform resource identifier)
-        // $client = new GuzzleHttp\Client(['base_uri' => 'https://foo.com/api/']);
-        $client = new Client(['base_uri' => 'https://www.omdbapi.com/?apikey=[1bbadff0]&']);
+        $client = new Client(
+            [
+                'base_uri' => self::URI
+            ]
+        );
 
-//        "http://www.omdbapi.com/?s=inception&apikey=[yourkey]"
-        // Send a request to https://foo.com/api/test
-        $response = $client->request('GET', 't=[batman]');
-        dd($response);
+        $headers = [
+            'Authorization' => 'Bearer ',
+            'Accept'        => 'application/json',
+        ];
 
-        return $this->render('api/index.html.twig', [
-            'controller_name' => 'ApiController',
+        // Send a request
+        // use self to reference a class variable (constant) or method
+        $response = $client->request(
+            'GET',
+            '/?t='.$searchMovie.'&apikey=' . self::TOKEN,
+            [
+                'headers' => $headers
+            ]
+        )->getBody()->getContents();
+
+        // casting -> convert a variable to array
+        $movieDetails = (array) json_decode($response);
+
+        //associative array -> key and value (Ex: Genre and Action)
+        $genre = $movieDetails['Genre'];
+
+//        genre = Action, Crime, Thriller
+//        php explode -> remove a string from an array of string
+        $genreArray = explode(',', $genre);
+
+        // override array $movieDetails['Genre']; with $genreArray
+        $movieDetails['Genre'] = $genreArray;
+
+        return $this->render('api/index.html.twig',[
+            'data' => $movieDetails
         ]);
+
     }
 }
+
