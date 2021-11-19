@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Command\MovieSynchroniseCommand;
+use App\Service\MovieService;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,59 +15,42 @@ use GuzzleHttp\Client;
 
 class ApiController extends AbstractController
 {
-//    define constant
-    const TOKEN = "1bbadff0";
-    const URI = "http://www.omdbapi.com";
-
     /**
      * @Route("/api", name="api")
      * @param Request $request
      * @return Response
      * @throws GuzzleException
      */
-    public function getMovie(Request $request): Response
+
+
+    public function getMovie(Request $request, MovieService $movieService): Response
     {
-//        $searchMovie = $request->get('search');
-        $searchMovie = "the+witcher";
 
-        // Create a client with a base URI (uniform resource identifier)
-        $client = new Client(
-            [
-                'base_uri' => self::URI
-            ]
-        );
+        // value from search bar
+        $movieName = $request->get('title');
+//        dd($movieName);
+//                $searchMovie = "hitman";
 
-        $headers = [
-            'Authorization' => 'Bearer ',
-            'Accept'        => 'application/json',
-        ];
+        if (!empty($movieName)) {
 
-        // Send a request
-        // use self to reference a class variable (constant) or method
-        $response = $client->request(
-            'GET',
-            '/?t='.$searchMovie.'&apikey=' . self::TOKEN,
-            [
-                'headers' => $headers
-            ]
-        )->getBody()->getContents();
+            //call function getMovies in service MovieService
+            $movieDetails = $movieService->getMovies($movieName);
 
-        // casting -> convert a variable to array
-        $movieDetails = (array) json_decode($response);
+//            dd($movieDetails);
+             
+            return $this->render('partials/listapi.html.twig',[
+                'data' => $movieDetails
+            ]);
 
-        //associative array -> key and value (Ex: Genre and Action)
-        $genre = $movieDetails['Genre'];
 
-//        genre = Action, Crime, Thriller
-//        php explode -> remove a string from an array of string
-        $genreArray = explode(',', $genre);
+        } else {
 
-        // override array $movieDetails['Genre']; with $genreArray
-        $movieDetails['Genre'] = $genreArray;
+            return $this->render('api/index.html.twig',[
+                'data' => []
+            ]);
 
-        return $this->render('api/index.html.twig',[
-            'data' => $movieDetails
-        ]);
+        }
+
 
     }
 }

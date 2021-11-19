@@ -115,6 +115,9 @@
     "laminas/laminas-code": {
         "version": "4.4.3"
     },
+    "league/climate": {
+        "version": "3.7.0"
+    },
     "monolog/monolog": {
         "version": "2.3.5"
     },
@@ -245,6 +248,9 @@
     },
     "sebastian/version": {
         "version": "3.0.2"
+    },
+    "seld/cli-prompt": {
+        "version": "1.0.4"
     },
     "sensio/framework-extra-bundle": {
         "version": "6.2",

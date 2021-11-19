@@ -23,7 +23,7 @@ class MovieRepository extends ServiceEntityRepository
     /**
      * @return Query Returns an array of Movie objects
      */
-    public function findByTitleField($searchTitle)
+    public function findByTitleField($searchTitle): Query
     {
         return $this->createQueryBuilder('m')
             ->where('m.title LIKE :val')

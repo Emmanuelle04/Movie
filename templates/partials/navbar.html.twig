@@ -3,6 +3,10 @@
         Home
     </a>
 
+    <a class="active item" href="{{ path('api') }}">
+        API
+    </a>
+
     <a class="active item" href="{{ path('app_login') }}">
         Login
     </a>
@@ -11,12 +15,18 @@
         New Movie
     </a>
 
-    <div class="ui simple dropdown item">
-        <div class="text">User</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            <div href="{{ path('app_register') }}" class="item">Register</div>
-            <div href="{{ path('app_login') }}" class="item">Log In</div>
+    <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+            User
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item">
+                    <a href="{{ path ('app_register') }}">Register</a>
+                </div>
+                <div class="active item">
+                    <a href="{{ path ('app_login') }}">Log In</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -39,5 +49,3 @@
     </div>
 
 </div>
-
-

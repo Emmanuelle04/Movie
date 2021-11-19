@@ -15,5 +15,3 @@ window.$ = window.jQuery = jQuery;
 require('../node_modules/semantic-ui/dist/semantic.min.js')
 require('./js/main.js');
 
-// start the Stimulus application
-// import './bootstrap.min.css';

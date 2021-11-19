@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
+use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,20 +15,15 @@ class SearchMovieController extends AbstractController
     /**
      * @Route("/search/movie", name="search_movie")
      */
-    public function searchMovie(Request $request): JsonResponse
+    public function searchMovie(Request $request, MovieRepository $movieRepository): JsonResponse
     {
         $searchTitle = $request->get('search');
-//dd(
-//    $request
-//);
-        $em = $this->getDoctrine()->getManager();
-        $search = $em->getRepository(Movie::class)->findByTitleField($searchTitle);
-//dd(
-//  $search->getSQL()
-//);
-        $results = $search->getResult();
 
-//        dd($results);
+//        $em = $this->getDoctrine()->getManager();
+//        $search = $em->getRepository(Movie::class)->findByTitleField($searchTitle);
+        $search  = $movieRepository ->findByTitleField($searchTitle);
+
+        $results = $search->getResult();
 
         $content = $this->renderView('partials/list.html.twig', [
             'data' => $results

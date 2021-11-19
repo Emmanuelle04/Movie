@@ -30,6 +30,12 @@
     padding: 10px;
 }
 
+.container3{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
 .ui.card{
     padding: 50px;
 }
@@ -42,4 +48,10 @@
     alignment: center;
 }
 
+.dropdown.item > .menu{
+    margin-top: 0 !important;
+}
 
+.ui.simple.dropdown.item{
+    background: #ffffff;
+}

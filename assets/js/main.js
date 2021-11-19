@@ -1,3 +1,4 @@
+// close flash message
 $('.message .close')
     .on('click', function () {
         $(this)
@@ -7,48 +8,69 @@ $('.message .close')
     })
 ;
 
-$(document).ready(function () {
-    $('.ui simple dropdown item').dropdown();
-});
-
+// hover on cards in home page
 $('.special.cards .image').dimmer({
     on: 'hover'
 });
 
-$('#searchbtn')
-    .on('click', function () {
-        var searchvalue = $(this).prev('#search').val();
+// function searchMovie(){
+$("#searchbtn").on('click', function (e) {
+    const searchvalue = $(this).prev('#search').val();
 
-        $.ajax({
-            type: "POST",
-            url: "/search/movie",
-            data: {search: searchvalue},
-            success: function (response) {
-                $('.container1').html(response.searchMovie);
-                console.log(response);
-            },
-            error: function (response) {
-                console.log(response);
-            }
-        });
+    $.ajax({
+        type: "POST",
+        url: "/search/movie",
+        data: {search: searchvalue},
+        success: function (response) {
+            $('.container1').html(response.searchMovie);
+            console.log(response);
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+})
 
+// function searchApi(){
+//     $("#searchIcon").on('click', function (e) {
+//     const searchMovie = $(this).prev('#searchTitle').val();
+//     // console.log(searchMovie);
+//
+//     $.ajax({
+//         type: "POST",
+//         url: "/api",
+//         data: {title: searchMovie},
+//         success: function (response) {
+//             $('.container3').html(response);
+//             // $('.container3').append(response.data);
+//             // console.log(response);
+//         },
+//         error: function (response) {
+//             console.log(response);
+//         },
+//     })
+// })
+//
+// }
+
+$("#searchIcon").on('click', function (e) {
+    const searchMovie = $(this).prev('#searchTitle').val();
+    // var searchMovie = "hitman";
+    console.log(searchMovie);
+
+    $.ajax({
+        type: "POST",
+        url: "/api",
+        data: {title: searchMovie},
+        success: function (response) {
+            $('.container3').html(response);
+            // $('.container3').append(response.data);
+            // console.log(response);
+        },
+        error: function (response) {
+            console.log(response);
+        },
     })
+})
 
-$('#searchicon')
-    .on('click', function () {
-        var searchMovie = $(this).prev('#searchtitle').val();
-        console.log(searchMovie);
 
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/api",
-        //     data: {search: searchMovie},
-        //     success: function (response) {
-        //         console.log(response);
-        //     },
-        //     error: function (response) {
-        //         console.log(response);
-        //     }
-        // });
-
-    })
