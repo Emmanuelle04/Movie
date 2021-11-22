@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of Rentals{% endblock %}
+
+{% block body %}
+    {% include('partials/navbaruser.html.twig') %}
+
+    <div class="example-wrapper">
+        <h2 style="text-align: center">List of rentals</h2>
+
+        <table class="ui fixed table" id="mytable">
+            <tr>
+                <th>Movie Title</th>
+                <th>Rental Date</th>
+                <th>Return Date</th>
+            </tr>
+            {% for x in data %}
+                <tr>
+                    <td>{{ x.id }}</td>
+                    <td>{{ x.rental_date }}</td>
+                    <td>{{ x.return_date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+
+{% endblock %}
