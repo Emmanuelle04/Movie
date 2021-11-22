@@ -23,7 +23,7 @@ class MovieController extends AbstractController
     {
         $movie = new Movie();
 
-        $form = $this->createForm(MovieType::class, $movie);
+        $form  = $this->createForm(MovieType::class, $movie);
 
         $form->handleRequest($request);
 
@@ -31,9 +31,8 @@ class MovieController extends AbstractController
 
             $movie->setAvailability(0);
 
-            $em = $this->getDoctrine()->getManager();
-
-            $file = $form->get('poster')->getData();
+            $em       = $this->getDoctrine()->getManager();
+            $file     = $form->get('poster')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('poster_directory'), $fileName);
             $movie->setPoster($fileName);
@@ -62,13 +61,13 @@ class MovieController extends AbstractController
             $this->addFlash('error', 'Movie not found at Id '.$id);
         }
 
-        $form = $this->createForm(MovieType::class, $movie);
+        $form  = $this->createForm(MovieType::class, $movie);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $form->get('poster')->getData();
+            $file     = $form->get('poster')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('poster_directory'), $fileName);
             $movie->setPoster($fileName);
@@ -78,7 +77,7 @@ class MovieController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Movie Edited!');
-            header("refresh:5;");
+            header("refresh:3;url=../../view/movie");
         }
 
         return $this->render('movie/editmovie.html.twig', array(
@@ -96,11 +95,14 @@ class MovieController extends AbstractController
 
         if (!$movie) {
             $this->addFlash('error', 'Movie not found at Id '.$id);
-        }
-        if ($movie != null) {
+        } else
+        {
             $em = $this->getDoctrine()->getManager();
             $em->remove($movie);
             $em->flush();
+
+            $this->addFlash('success', 'Movie Deleted!');
+//            header("refresh:3;url=../../view/movie");
         }
 
         return $this->redirectToRoute('view_movie');

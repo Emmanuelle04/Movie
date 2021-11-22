@@ -5,10 +5,12 @@ namespace App\Service;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
+
+
 class MovieService
 {
-    const TOKEN        = "1bbadff0";
-    const URI          = "http://www.omdbapi.com";
+    const TOKEN = "1bbadff0";
+    const URI = "http://www.omdbapi.com";
     const QUERY_STRING = '/?t=%s&apikey=%s';
 
     /**
@@ -36,9 +38,11 @@ class MovieService
             ->getBody()
             ->getContents();
 
-        // Casting - convert a variable to array
-        $movieDetails = (array) json_decode($response);
 
+        // Casting - convert a variable to array
+        $movieDetails = (array)json_decode($response);
+
+        if ($movieDetails)
         // Associative array - key and value (Ex: Genre and Action)
         $movieDetails['Genre'] = explode(
             ',',
@@ -47,4 +51,6 @@ class MovieService
 
         return $movieDetails;
     }
+
+
 }

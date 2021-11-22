@@ -1,4 +1,4 @@
-// close flash message
+// Close flash message
 $('.message .close')
     .on('click', function () {
         $(this)
@@ -8,12 +8,12 @@ $('.message .close')
     })
 ;
 
-// hover on cards in home page
+// Hover on cards in home page
 $('.special.cards .image').dimmer({
     on: 'hover'
 });
 
-// function searchMovie(){
+// Search Movies in database
 $("#searchbtn").on('click', function (e) {
     const searchvalue = $(this).prev('#search').val();
 
@@ -23,7 +23,9 @@ $("#searchbtn").on('click', function (e) {
         data: {search: searchvalue},
         success: function (response) {
             $('.container1').html(response.searchMovie);
-            console.log(response);
+            $('.special.cards .image').dimmer({
+                on: 'hover'
+            });
         },
         error: function (response) {
             console.log(response);
@@ -31,28 +33,7 @@ $("#searchbtn").on('click', function (e) {
     });
 })
 
-// function searchApi(){
-//     $("#searchIcon").on('click', function (e) {
-//     const searchMovie = $(this).prev('#searchTitle').val();
-//     // console.log(searchMovie);
-//
-//     $.ajax({
-//         type: "POST",
-//         url: "/api",
-//         data: {title: searchMovie},
-//         success: function (response) {
-//             $('.container3').html(response);
-//             // $('.container3').append(response.data);
-//             // console.log(response);
-//         },
-//         error: function (response) {
-//             console.log(response);
-//         },
-//     })
-// })
-//
-// }
-
+// Search Movies from Movie Api
 $("#searchIcon").on('click', function (e) {
     const searchMovie = $(this).prev('#searchTitle').val();
     // var searchMovie = "hitman";
@@ -64,7 +45,6 @@ $("#searchIcon").on('click', function (e) {
         data: {title: searchMovie},
         success: function (response) {
             $('.container3').html(response);
-            // $('.container3').append(response.data);
             // console.log(response);
         },
         error: function (response) {

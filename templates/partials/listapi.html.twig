@@ -1,7 +1,16 @@
 {% if data | length > 0 %}
+
+    {% for message in app.flashes('error') %}
+        <div class="ui error message">
+            <i class="close icon"></i>
+            <div class="header">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+
     <div class="container-fluid" style="margin: auto;">
         <div class="ui segment">
-
             <div class="ui equal width center aligned padded grid" style="margin: auto;">
                 <div class="row">
 

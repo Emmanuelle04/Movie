@@ -8,6 +8,15 @@
     <div class="example-wrapper">
         <h1 style="text-align: center">List of Movies</h1>
 
+        {% for message in app.flashes('success') %}
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <div class="header">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
         <table class="ui fixed table" id="mytable">
             <tr>
                 <th>Movie Title</th>

@@ -3,12 +3,10 @@
 namespace App\Command;
 
 use App\Entity\Movie;
-use App\Repository\MovieRepository;
 use App\Service\MovieService;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -42,19 +40,52 @@ class MovieSynchroniseCommand extends Command
     protected static $defaultDescription = 'Synchronise movie api with database';
 
     /**
+     * @var string[]
+     */
+    public $movieList = [
+        "Captain America: The First Avenger",
+        "Captain Marvel",
+        "Iron Man",
+        "Iron Man 2",
+        "The Incredible Hulk",
+        "Thor",
+        "The Avengers",
+        "Iron Man 3",
+        "Thor: The Dark World",
+        "Captain America: The Winter Soldier",
+        "Guardians of the Galaxy",
+        "Guardians of the Galaxy 2",
+        "Avengers: Age of Ultron",
+        "Ant-Man",
+        "Captain America: Civil War",
+        "Black Widow",
+        "Spider-Man: Homecoming",
+        "Doctor Strange",
+        "Black Panther",
+        "Thor: Ragnarok",
+        "Avengers: Infinity War",
+        "Ant-Man and the Wasp",
+        "Avengers: Endgame",
+        "Shang-Chi and the Legend of the Ten Rings",
+        "Spider-Man: Far From Home",
+        "Eternals"
+    ];
+
+    /**
      * @param MovieService $movieService
      * @param EntityManagerInterface $entityManager
      * @param ParameterBagInterface $parameterBag
      * @param string|null $name
      */
     public function __construct(
-        MovieService $movieService,
+        MovieService           $movieService,
         EntityManagerInterface $entityManager,
-        ParameterBagInterface $parameterBag,
-        string $name = null
-    ) {
+        ParameterBagInterface  $parameterBag,
+        string                 $name = null
+    )
+    {
         $this->movieService = $movieService;
-        $this->em           = $entityManager;
+        $this->em = $entityManager;
         $this->parameterBag = $parameterBag;
 
         parent::__construct($name);
@@ -63,8 +94,7 @@ class MovieSynchroniseCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('movie_name', InputArgument::OPTIONAL, 'The name of the Movie')
-        ;
+            ->addArgument('movie_name', InputArgument::OPTIONAL, 'The name of the Movie');
     }
 
     /**
@@ -74,6 +104,27 @@ class MovieSynchroniseCommand extends Command
     {
         $movieName = $input->getArgument('movie_name');
 
+        if ($movieName) {
+            $this->processMovie($output, $movieName);
+
+            return true;
+        }
+
+        foreach ($this->movieList as $movieName) {
+           $this->processMovie($output, $movieName);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $output
+     * @param $movieName
+     * @return void
+     * @throws GuzzleException
+     */
+    private function processMovie($output, $movieName): void
+    {
         $output->writeln([
             sprintf('<info>Movie detected => %s</info>', $movieName),
             'Fetch Movie details from API in progress'
@@ -86,7 +137,7 @@ class MovieSynchroniseCommand extends Command
                 '<comment>Movie in database detected, exiting</comment>',
             ]);
 
-            return false;
+            return;
         }
 
         $output->writeln([
@@ -98,8 +149,6 @@ class MovieSynchroniseCommand extends Command
         $output->writeln([
             'Movie saved'
         ]);
-
-        return true;
     }
 
     /**
@@ -114,8 +163,7 @@ class MovieSynchroniseCommand extends Command
             // Calling movie api service
             return $this
                 ->movieService
-                ->getMovies($movieName)
-                ;
+                ->getMovies($movieName);
         } catch (\Exception $exception) {
             $output->writeln([
                 'Movie Details fetched from api failed, exit command'
@@ -132,11 +180,11 @@ class MovieSynchroniseCommand extends Command
     private function checkIfMovieExists($movieName): bool
     {
         return !empty(
-            $this
-                ->em
-                ->getRepository(Movie::class)
-                ->findByTitleField($movieName)
-                ->getResult()
+        $this
+            ->em
+            ->getRepository(Movie::class)
+            ->findByTitleField($movieName)
+            ->getResult()
         );
     }
 
@@ -155,19 +203,34 @@ class MovieSynchroniseCommand extends Command
         $movie->setProducer($film['Director']);
         $movie->setReleasedDate($date);
 
+        $posterName = $this->saveImage($film);
+
+        $movie->setPoster($posterName);
+
+        $this->em->persist($movie);
+        $this->em->flush();
+    }
+
+    /**
+     * @param $film
+     * @return string
+     */
+    private function saveImage($film): string
+    {
+        if (empty($film['Poster'])) {
+            return 'not_found.png';
+        }
+
         $posterName = uniqid() . '.jpg';
 
-        $content    = file_get_contents($film['Poster']);
-        $fp         = fopen(
+        $content = file_get_contents($film['Poster']);
+        $fp = fopen(
             $this->parameterBag->get('kernel.project_dir') . "/public/uploads/poster/" . $posterName,
             "w"
         );
         fwrite($fp, $content);
         fclose($fp);
 
-        $movie->setPoster($posterName);
-
-        $this->em->persist($movie);
-        $this->em->flush();
+        return $posterName;
     }
 }

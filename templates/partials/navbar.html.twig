@@ -30,12 +30,18 @@
         </div>
     </div>
 
-    <div class="ui simple dropdown item">
-        <div class="text">Movie</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            <div href="{{ path('movie') }}" class="item">New</div>
-            <div href="{{ path('view_movie') }}" class="item">List</div>
+    <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+            Movie
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <div class="item">
+                    <a href="{{ path ('movie') }}">New</a>
+                </div>
+                <div class="active item">
+                    <a href="{{ path ('view_movie') }}">List</a>
+                </div>
+            </div>
         </div>
     </div>
 

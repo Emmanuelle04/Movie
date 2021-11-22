@@ -23,9 +23,9 @@ class ApiController extends AbstractController
      */
 
 
-    public function getMovie(Request $request, MovieService $movieService): Response
+    public function getMovie(Request $request, MovieService $movieService, MovieSynchroniseCommand $command): Response
     {
-
+        $test = $command->movieList;
         // value from search bar
         $movieName = $request->get('title');
 //        dd($movieName);
@@ -33,24 +33,30 @@ class ApiController extends AbstractController
 
         if (!empty($movieName)) {
 
-            //call function getMovies in service MovieService
-            $movieDetails = $movieService->getMovies($movieName);
+            try {
+                //call function getMovies in service MovieService
+                $movieDetails = $movieService->getMovies($movieName);
 
-//            dd($movieDetails);
-             
-            return $this->render('partials/listapi.html.twig',[
+            } catch (\Exception $exception) {
+                $this->addFlash('error', 'Movie not found!');
+
+                return $this->render('partials/listapi.html.twig', [
+                    'data' => [],
+                ]);
+            }
+
+            return $this->render('partials/listapi.html.twig', [
                 'data' => $movieDetails
             ]);
 
 
         } else {
 
-            return $this->render('api/index.html.twig',[
-                'data' => []
+            return $this->render('api/index.html.twig', [
+                'data' => [],
             ]);
 
         }
-
 
     }
 }

@@ -15,7 +15,7 @@
                         <img src="{{ asset('uploads/poster/' ~ x.poster) }}">
                     </div>
                     <div class="content">
-                        <p class="header">{{ x.title }}</p>
+                        <a href="{{ path('view_movie_details', {id: x.id}) }}" class="header">{{ x.title }}</a>
                     </div>
 
                 </div>
