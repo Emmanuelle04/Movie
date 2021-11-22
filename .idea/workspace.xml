@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fb913a8-b858-4c65-aa07-d07ac90cbac4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error404.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/MovieSynchroniseCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/MovieSynchroniseCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MovieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/MovieService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MovieService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/listapi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/listapi.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/navbar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_movie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_movie_details/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie_details/index.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="4fb913a8-b858-4c65-aa07-d07ac90cbac4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -256,6 +243,7 @@
       <workItem from="1637296868152" duration="70000" />
       <workItem from="1637296957167" duration="7411000" />
       <workItem from="1637304389049" duration="13536000" />
+      <workItem from="1637554869772" duration="367000" />
     </task>
     <servers />
   </component>
