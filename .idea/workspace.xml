@@ -2,54 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fb913a8-b858-4c65-aa07-d07ac90cbac4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/packages/ansi_to_html.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/partials/admin/navbaradmin.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/partials/listmovie.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/search_movie_id/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab57c6d7-b4be-473e-8ce0-77481de87b6c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab57c6d7-b4be-473e-8ce0-77481de87b6c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/movie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/movie.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Command/MovieSynchroniseCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/MovieSynchroniseCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminViewMovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminViewMovieController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeUserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MovieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RentalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RentalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SearchMovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchMovieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewMovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewMovieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewMovieDetailsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewMovieDetailsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewRentalsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewRentalsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ViewUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ViewUserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/MovieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MovieType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RentalType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RentalType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/MovieRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MovieRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/MovieService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MovieService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_view_movie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_view_movie/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error403.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error403.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/movie/editmovie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movie/editmovie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/movie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/movie/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/listapi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/listapi.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/navbar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/navbaradmin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/navbarapi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/navbarapi.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/navbaruser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/navbaruser.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rental/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rental/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_movie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_rentals/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_rentals/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_user/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +260,7 @@
       <workItem from="1637575322573" duration="6170000" />
       <workItem from="1637640384008" duration="1889000" />
       <workItem from="1637642491214" duration="22802000" />
-      <workItem from="1637727841222" duration="658000" />
+      <workItem from="1637727841222" duration="13775000" />
     </task>
     <servers />
   </component>

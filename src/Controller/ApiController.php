@@ -28,6 +28,7 @@ class ApiController extends AbstractController
         // value from search bar
         $movieName = $request->get('title');
 
+
         if (!empty($movieName)) {
 
             try {
@@ -42,7 +43,6 @@ class ApiController extends AbstractController
                     'data' => []
                 ]);
             }
-
 
             return $this->render('partials/listapi.html.twig', [
                 'data' => $movieDetails

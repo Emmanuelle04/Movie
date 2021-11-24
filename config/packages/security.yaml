@@ -49,3 +49,4 @@ security:
       - { path: ^/view/movie, roles: ROLE_ADMIN}
       - { path: ^/admin/view/movie, roles: ROLE_ADMIN }
       - { path: ^/home/user, roles: ROLE_USER }
+      - { path: ^/search/movie/id, roles: ROLE_ADMIN }

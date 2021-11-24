@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -21,37 +22,33 @@ class SearchMovieIDController extends AbstractController
     /**
      * @Route("/search/movie/id", name="search_movie_id")
      * @throws Exception
+     * @throws GuzzleException
      */
     public function getMovie(Request $request, MovieService $movieService, KernelInterface $kernel): Response
     {
-        $application = new Application($kernel);
-        $application->setAutoExit(false);
+        //  get movie imdbid from search bar
+        $movieID = $request->get('search') ?? '';
 
+        if (!empty($movieID)) {
+            try {
+                // Call function processMovie in Movie Service
+                $results = $movieService->processMovie($movieID, 'i');
 
-//        get id from search bar
-        $movieID = $request->get('search');
+            } catch(Exception $exception) {
+                $this->addFlash('error', 'Movie not found!');
 
-//            call command from controller
-        $input = new ArrayInput([
-            'command' => 'app:movie-synchronise',
-            'movie_id' => $movieID ?? '',
-            'searchParam' =>'i'
-        ]);
+                return $this->render('partials/listapi.html.twig', [
+                    'data' => []
+                ]);
+            }
 
-        $output = new BufferedOutput(
-            OutputInterface::VERBOSITY_NORMAL,
-            true
-        );
+            return $this->render('partials/listapi.html.twig', [
+                'data' => $results
+            ]);
 
-        $converter = new AnsiToHtmlConverter();
+        }
 
-        $application->run($input, $output);
+        return $this->render('search_movie_id/index.html.twig');
 
-//        return new Response($output->fetch());
-
-
-        return $this->render('search_movie_id/index.html.twig', [
-            'controller_name' => 'SearchMovieIDController',
-        ]);
     }
 }

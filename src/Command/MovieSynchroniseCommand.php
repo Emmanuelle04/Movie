@@ -5,12 +5,14 @@ namespace App\Command;
 use App\Entity\Movie;
 use App\Service\MovieService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use function PHPUnit\Framework\throwException;
 
 class MovieSynchroniseCommand extends Command
 {
@@ -73,20 +75,14 @@ class MovieSynchroniseCommand extends Command
 
     /**
      * @param MovieService $movieService
-     * @param EntityManagerInterface $entityManager
-     * @param ParameterBagInterface $parameterBag
      * @param string|null $name
      */
     public function __construct(
         MovieService           $movieService,
-        EntityManagerInterface $entityManager,
-        ParameterBagInterface  $parameterBag,
         string                 $name = null
     )
     {
         $this->movieService = $movieService;
-        $this->em = $entityManager;
-        $this->parameterBag = $parameterBag;
 
         parent::__construct($name);
     }
@@ -107,137 +103,35 @@ class MovieSynchroniseCommand extends Command
         $movieID = $input->getArgument('movie_id');
         $searchParam = $input->getArgument('searchParam');
 
-
         if ($movieID) {
-            $this->processMovie($output, $movieID, $searchParam);
+            $output->writeln([
+                sprintf('<info>Movie detected => %s, Search Parameter detected => %s</info>', $movieID, $searchParam),
+                'Fetch Movie details from API in progress'
+            ]);
+
+            try {
+                $this->movieService->processMovie($movieID, $searchParam);
+
+            } catch (Exception $exception) {
+                $output->writeln([
+                    "<comment>{$exception->getMessage()}</comment>",
+                ]);
+
+                return false;
+            }
+
+            $output->writeln([
+                'Movie saved'
+            ]);
 
             return true;
         }
 
-        foreach ($this->movieList as $movieID) {
-           $this->processMovie($output, $movieID, $searchParam);
-        }
+//        foreach ($this->movieList as $movieID) {
+//           $this->processMovie($output, $movieID, $searchParam);
+//        }
 
         return true;
     }
 
-    /**
-     * @param $output
-     * @param $movieID
-     * @param $searchParam
-     * @return void
-     * @throws GuzzleException
-     */
-    private function processMovie($output, $movieID, $searchParam): void
-    {
-        $output->writeln([
-            sprintf('<info>Movie detected => %s, Parameter detected => %s</info>', $movieID, $searchParam),
-            'Fetch Movie details from API in progress'
-        ]);
-
-
-        $film = $this->fetchMovieDetails($movieID, $output, $searchParam);
-
-        if ($this->checkIfMovieExists($movieID)) {
-            $output->writeln([
-                '<comment>Movie in database detected, exiting</comment>',
-            ]);
-
-            return;
-        }
-
-        $output->writeln([
-            'Movie Details fetched, saving into database'
-        ]);
-
-        $this->saveMovie($film);
-
-        $output->writeln([
-            'Movie saved'
-        ]);
-    }
-
-    /**
-     * @param $movieID
-     * @param $output
-     * @return array|false
-     * @throws GuzzleException
-     */
-    private function fetchMovieDetails($movieID, $output, $searchParam)
-    {
-        try {
-            // Calling movie api service
-            return $this
-                ->movieService
-                ->getMovies($movieID,$searchParam);
-        } catch (\Exception $exception) {
-            $output->writeln([
-                'Movie Details fetched from api failed, exit command'
-            ]);
-
-            return false;
-        }
-    }
-
-    /**
-     * @param $movieName
-     * @return bool
-     */
-    private function checkIfMovieExists($movieID): bool
-    {
-        return !empty(
-        $this
-            ->em
-            ->getRepository(Movie::class)
-            ->findByID($movieID)
-            ->getResult()
-        );
-    }
-
-    /**
-     * @param $film
-     */
-    private function saveMovie($film)
-    {
-        $movie = new Movie();
-        $date  = \DateTime::createFromFormat(
-            'd M Y',
-            $film['Released']
-        );
-        $movie->setTitle($film['Title']); //Respective entity methods
-        $movie->setDescription($film['Plot']);
-        $movie->setProducer($film['Director']);
-        $movie->setReleasedDate($date);
-        $movie->setImdbID($film['imdbID']);
-
-        $posterName = $this->saveImage($film);
-
-        $movie->setPoster($posterName);
-
-        $this->em->persist($movie);
-        $this->em->flush();
-    }
-
-    /**
-     * @param $film
-     * @return string
-     */
-    private function saveImage($film): string
-    {
-        if (empty($film['Poster'])) {
-            return 'not_found.png';
-        }
-
-        $posterName = uniqid() . '.jpg';
-
-        $content = file_get_contents($film['Poster']);
-        $fp = fopen(
-            $this->parameterBag->get('kernel.project_dir') . "/public/uploads/poster/" . $posterName,
-            "w"
-        );
-        fwrite($fp, $content);
-        fclose($fp);
-
-        return $posterName;
-    }
 }

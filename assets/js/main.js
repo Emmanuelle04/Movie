@@ -61,12 +61,13 @@ $("#searchIcon").on('click', function (e) {
 
 // Search Movies by id from Movie Api
 $("#searchBtn").on('click', function (e) {
-    const searchMovie = $(this).prev('#searchMovie').val();
-    // console.log(searchMovie);
+    const searchID = $(this).prev('#searchMovie').val();
+    console.log(searchID);
+
     $.ajax({
         type: "POST",
         url: "/search/movie/id",
-        data: {search: searchMovie},
+        data: {search: searchID},
         success: function (response) {
             $('.container3').html(response);
             $('.message .close')
