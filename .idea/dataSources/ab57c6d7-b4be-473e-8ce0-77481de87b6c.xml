@@ -988,111 +988,115 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>9</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <index id="277" parent="258" name="IDX_1D5EF26F12469DE2">
+    <column id="277" parent="258" name="imdb_id">
+      <Position>10</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <index id="278" parent="258" name="IDX_1D5EF26F12469DE2">
       <ColNames>category_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="278" parent="258" name="PRIMARY">
+    <key id="279" parent="258" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="279" parent="258" name="FK_1D5EF26F12469DE2">
+    <foreign-key id="280" parent="258" name="FK_1D5EF26F12469DE2">
       <ColNames>category_id</ColNames>
       <RefTableName>category</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="280" parent="259" name="id">
+    <column id="281" parent="259" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="281" parent="259" name="movie_id">
+    <column id="282" parent="259" name="movie_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="282" parent="259" name="user_id">
+    <column id="283" parent="259" name="user_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="283" parent="259" name="rental_date">
+    <column id="284" parent="259" name="rental_date">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="284" parent="259" name="return_date">
+    <column id="285" parent="259" name="return_date">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="285" parent="259" name="IDX_1619C27D8F93B6FC">
+    <index id="286" parent="259" name="IDX_1619C27D8F93B6FC">
       <ColNames>movie_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="286" parent="259" name="IDX_1619C27DA76ED395">
+    <index id="287" parent="259" name="IDX_1619C27DA76ED395">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="287" parent="259" name="PRIMARY">
+    <key id="288" parent="259" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="288" parent="259" name="FK_1619C27D8F93B6FC">
+    <foreign-key id="289" parent="259" name="FK_1619C27D8F93B6FC">
       <ColNames>movie_id</ColNames>
       <RefTableName>movie</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="289" parent="259" name="FK_1619C27DA76ED395">
+    <foreign-key id="290" parent="259" name="FK_1619C27DA76ED395">
       <ColNames>user_id</ColNames>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="290" parent="260" name="id">
+    <column id="291" parent="260" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="291" parent="260" name="first_name">
+    <column id="292" parent="260" name="first_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="292" parent="260" name="last_name">
+    <column id="293" parent="260" name="last_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="293" parent="260" name="username">
+    <column id="294" parent="260" name="username">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="294" parent="260" name="password">
+    <column id="295" parent="260" name="password">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="295" parent="260" name="roles">
+    <column id="296" parent="260" name="roles">
       <Position>6</Position>
       <DataType>json|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="296" parent="260" name="UNIQ_8D93D649F85E0677">
+    <index id="297" parent="260" name="UNIQ_8D93D649F85E0677">
       <ColNames>username</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="297" parent="260" name="PRIMARY">
+    <key id="298" parent="260" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="298" parent="260" name="UNIQ_8D93D649F85E0677">
+    <key id="299" parent="260" name="UNIQ_8D93D649F85E0677">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>UNIQ_8D93D649F85E0677</UnderlyingIndexName>
     </key>

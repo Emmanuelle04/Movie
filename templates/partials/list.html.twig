@@ -1,4 +1,15 @@
+
+
 <div class="container1">
+
+    {% for message in app.flashes('error') %}
+        <div class="ui error message">
+            <i class="close icon"></i>
+            <div class="header">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
         <div class="ui special cards">
             {% for x in data %}
                 <div class="card">

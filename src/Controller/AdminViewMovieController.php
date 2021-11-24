@@ -15,7 +15,6 @@ class AdminViewMovieController extends AbstractController
     {
         $movies = $this->getDoctrine()
             ->getRepository('App:Movie')->find($id);
-//            ->findAll();
 
         return $this->render('admin_view_movie/index.html.twig', array('result' => $movies));
 

@@ -3,10 +3,10 @@
 {% block title %}List of Movies{% endblock %}
 
 {% block body %}
-    {% include('partials/navbaradmin.html.twig') %}
+    {% include('partials/admin/navbaradmin.html.twig') %}
 
     <div class="example-wrapper">
-        <h1 style="text-align: center">List of Movies</h1>
+        <h2>List of Movies</h2>
 
         {% for message in app.flashes('success') %}
             <div class="ui success message">

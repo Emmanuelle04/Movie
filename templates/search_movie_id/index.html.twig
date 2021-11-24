@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Movie{% endblock %}
+
+{% block body %}
+    {% include 'partials/admin/navbaradmin.html.twig' %}
+
+    <div class="ui category search">
+        <div class="item">
+            <div class="ui transparent icon input">
+                <input id="searchMovie" type="text" placeholder="Search...">
+                <i id="searchBtn" class="search link icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="container3"></div>
+{% endblock %}

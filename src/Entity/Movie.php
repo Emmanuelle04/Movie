@@ -74,6 +74,11 @@ class Movie
      */
     private $rentals;
 
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    private $imdbID;
+
     public function __construct()
     {
         $this->rentals = new ArrayCollection();
@@ -196,6 +201,18 @@ class Movie
                 $rental->setMovie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImdbID()
+    {
+        return $this->imdbID;
+    }
+
+    public function setImdbID($imdbID): self
+    {
+        $this->imdbID = $imdbID;
 
         return $this;
     }

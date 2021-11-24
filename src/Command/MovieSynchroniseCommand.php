@@ -94,7 +94,8 @@ class MovieSynchroniseCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('movie_name', InputArgument::OPTIONAL, 'The name of the Movie');
+            ->addArgument('movie_id', InputArgument::OPTIONAL, 'The imdbID of the Movie')
+            ->addArgument('searchParam', InputArgument::OPTIONAL, 'The parameter for the Movie API');
     }
 
     /**
@@ -102,16 +103,19 @@ class MovieSynchroniseCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $movieName = $input->getArgument('movie_name');
 
-        if ($movieName) {
-            $this->processMovie($output, $movieName);
+        $movieID = $input->getArgument('movie_id');
+        $searchParam = $input->getArgument('searchParam');
+
+
+        if ($movieID) {
+            $this->processMovie($output, $movieID, $searchParam);
 
             return true;
         }
 
-        foreach ($this->movieList as $movieName) {
-           $this->processMovie($output, $movieName);
+        foreach ($this->movieList as $movieID) {
+           $this->processMovie($output, $movieID, $searchParam);
         }
 
         return true;
@@ -119,20 +123,22 @@ class MovieSynchroniseCommand extends Command
 
     /**
      * @param $output
-     * @param $movieName
+     * @param $movieID
+     * @param $searchParam
      * @return void
      * @throws GuzzleException
      */
-    private function processMovie($output, $movieName): void
+    private function processMovie($output, $movieID, $searchParam): void
     {
         $output->writeln([
-            sprintf('<info>Movie detected => %s</info>', $movieName),
+            sprintf('<info>Movie detected => %s, Parameter detected => %s</info>', $movieID, $searchParam),
             'Fetch Movie details from API in progress'
         ]);
 
-        $film = $this->fetchMovieDetails($movieName, $output);
 
-        if ($this->checkIfMovieExists($movieName)) {
+        $film = $this->fetchMovieDetails($movieID, $output, $searchParam);
+
+        if ($this->checkIfMovieExists($movieID)) {
             $output->writeln([
                 '<comment>Movie in database detected, exiting</comment>',
             ]);
@@ -152,18 +158,18 @@ class MovieSynchroniseCommand extends Command
     }
 
     /**
-     * @param $movieName
+     * @param $movieID
      * @param $output
      * @return array|false
      * @throws GuzzleException
      */
-    private function fetchMovieDetails($movieName, $output)
+    private function fetchMovieDetails($movieID, $output, $searchParam)
     {
         try {
             // Calling movie api service
             return $this
                 ->movieService
-                ->getMovies($movieName);
+                ->getMovies($movieID,$searchParam);
         } catch (\Exception $exception) {
             $output->writeln([
                 'Movie Details fetched from api failed, exit command'
@@ -177,13 +183,13 @@ class MovieSynchroniseCommand extends Command
      * @param $movieName
      * @return bool
      */
-    private function checkIfMovieExists($movieName): bool
+    private function checkIfMovieExists($movieID): bool
     {
         return !empty(
         $this
             ->em
             ->getRepository(Movie::class)
-            ->findByTitleField($movieName)
+            ->findByID($movieID)
             ->getResult()
         );
     }
@@ -202,6 +208,7 @@ class MovieSynchroniseCommand extends Command
         $movie->setDescription($film['Plot']);
         $movie->setProducer($film['Director']);
         $movie->setReleasedDate($date);
+        $movie->setImdbID($film['imdbID']);
 
         $posterName = $this->saveImage($film);
 

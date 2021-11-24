@@ -3,22 +3,22 @@
 {% block title %}List of Rentals{% endblock %}
 
 {% block body %}
-    {% include('partials/navbaruser.html.twig') %}
+    {% include('partials/admin/navbaradmin.html.twig') %}
 
     <div class="example-wrapper">
-        <h2 style="text-align: center">List of rentals</h2>
+        <h2>List of rentals</h2>
 
-        <table class="ui fixed table" id="mytable">
+        <table class="ui celled table">
             <tr>
-                <th>Movie Title</th>
+                <th>ID</th>
                 <th>Rental Date</th>
                 <th>Return Date</th>
             </tr>
             {% for x in data %}
                 <tr>
                     <td>{{ x.id }}</td>
-                    <td>{{ x.rental_date }}</td>
-                    <td>{{ x.return_date }}</td>
+                    <td>{{ x.rentalDate.format('d/m/Y') }}</td>
+                    <td>{{ x.returnDate.format('d/m/Y') }}</td>
                 </tr>
             {% endfor %}
         </table>

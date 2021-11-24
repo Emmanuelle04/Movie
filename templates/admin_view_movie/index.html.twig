@@ -3,7 +3,7 @@
 {% block title %}View Movie{% endblock %}
 
 {% block body %}
-    {% include('partials/navbaradmin.html.twig') %}
+    {% include('partials/admin/navbaradmin.html.twig') %}
 
     <div class="container" style="margin: auto;">
         <div class="ui segment">
@@ -19,9 +19,9 @@
 
                 <div class="ui divider"></div>
 
-                <div class="meta">
-                    <span class="category"> {{ result.category.name }}</span>
-                </div>
+                <a class="ui blue image label">
+                    {{ result.category.name }}
+                </a>
 
                 <div class="ui divider"></div>
 

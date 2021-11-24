@@ -11,7 +11,6 @@ class ViewMovieController extends AbstractController
     /**
      * @Route("/view/movie", name="view_movie")
      */
-
     public function displayAction(): Response
     {
         $movies = $this->getDoctrine()

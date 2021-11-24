@@ -1,0 +1,14 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Access Not Granted</h1>
+
+    <p>
+        You don't have permission to access this page.
+    </p>
+
+    <p>
+       You can go back to the <a href="{{ path('home') }}"> homepage</a>.
+    </p>
+{% endblock %}

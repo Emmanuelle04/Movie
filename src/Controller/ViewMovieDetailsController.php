@@ -16,7 +16,6 @@ class ViewMovieDetailsController extends AbstractController
         $movies = $this->getDoctrine()
             ->getRepository('App:Movie')
             ->find($id);
-//            ->findAll();
 
         return $this->render('view_movie_details/index.html.twig', array('data' => $movies));
 

@@ -3,10 +3,10 @@
 {% block title %}Edit Movie{% endblock %}
 
 {% block body %}
-    {% include('partials/navbaradmin.html.twig') %}
+    {% include('partials/admin/navbaradmin.html.twig') %}
     <div class="example-wrapper">
 
-        <h1 style="text-align: center">Edit Movie</h1>
+        <h2>Edit Movie</h2>
 
         {% for message in app.flashes('error') %}
             <div class="ui error message">

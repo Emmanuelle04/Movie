@@ -58,12 +58,11 @@ class MovieType extends AbstractType
                 [
                     'widget' => 'single_text',
                     'attr' => array(
-                        'min' =>date('1950-01-01'),
+                        'min' => date('1950-01-01'),
                         'max' => date('Y-m-d')
                     )
                 ]
             )
-
             ->add(
                 'quantity',
                 IntegerType::class,
@@ -73,13 +72,12 @@ class MovieType extends AbstractType
                     ]
                 ]
             )
-
             ->add(
                 'poster',
                 FileType::class, array(
                     'data_class' => null,
                 )
-        );
+            );
 
     }
 

@@ -17,7 +17,6 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasherInterface): Response
     {
-
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('home');
         }
@@ -29,7 +28,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasherInterface->hashPassword(
+                $userPasswordHasherInterface->hashPassword(
                     $user,
                     $form->get('password')->getData()
                 )
@@ -46,7 +45,6 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Registration successful');
 
             header("refresh:3;url=login");
-//            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [

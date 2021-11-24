@@ -55,3 +55,11 @@
 .ui.simple.dropdown.item{
     background: #ffffff;
 }
+
+h1{
+    color: red;
+}
+
+h2{
+    text-align: center;
+}

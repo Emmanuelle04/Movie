@@ -13,7 +13,6 @@ class HomeUserController extends AbstractController
      */
     public function index(): Response
     {
-
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_login');
         }

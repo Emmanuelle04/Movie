@@ -17,6 +17,7 @@
         "league/climate": "^3.7",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.1",
+        "sensiolabs/ansi-to-html": "^1.2",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",

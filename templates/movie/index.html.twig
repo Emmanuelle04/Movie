@@ -3,10 +3,10 @@
 {% block title %}New Movie{% endblock %}
 
 {% block body %}
-    {% include('partials/navbaradmin.html.twig') %}
+    {% include('partials/admin/navbaradmin.html.twig') %}
     <div class="example-wrapper">
 
-        <h1 style="text-align: center">New Movie</h1>
+        <h2>New Movie</h2>
         {% for message in app.flashes('success') %}
             <div class="ui success message">
                 <i class="close icon"></i>

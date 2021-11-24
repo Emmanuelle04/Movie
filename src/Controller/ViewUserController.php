@@ -11,10 +11,13 @@ class ViewUserController extends AbstractController
     /**
      * @Route("/view/user", name="view_user")
      */
-    public function index(): Response
+    public function displayAction(): Response
     {
-        return $this->render('view_user/index.html.twig', [
-            'controller_name' => 'ViewUserController',
-        ]);
+        $users = $this->getDoctrine()
+            ->getRepository('App:User')
+            ->findAll();
+
+        return $this->render('view_user/index.html.twig', array('data' => $users));
+
     }
 }

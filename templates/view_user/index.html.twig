@@ -1,20 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ViewUserController!{% endblock %}
+{% block title %}List of Rentals{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include('partials/admin/navbaradmin.html.twig') %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="example-wrapper">
+        <h2>List of users</h2>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/movie/src/Controller/ViewUserController.php'|file_link(0) }}">src/Controller/ViewUserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/movie/templates/view_user/index.html.twig'|file_link(0) }}">templates/view_user/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <table class="ui celled table">
+            <tr>
+                <th>ID</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Username</th>
+            </tr>
+            {% for x in data %}
+                <tr>
+                    <td>{{ x.id }}</td>
+                    <td>{{ x.firstName }}</td>
+                    <td>{{ x.lastName }}</td>
+                    <td>{{ x.username }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+
 {% endblock %}

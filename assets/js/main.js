@@ -33,11 +33,9 @@ $("#searchbtn").on('click', function (e) {
     });
 })
 
-// Search Movies from Movie Api
+// Search Movies by title from Movie Api
 $("#searchIcon").on('click', function (e) {
     const searchMovie = $(this).prev('#searchTitle').val();
-    // var searchMovie = "hitman";
-    console.log(searchMovie);
 
     $.ajax({
         type: "POST",
@@ -45,6 +43,14 @@ $("#searchIcon").on('click', function (e) {
         data: {title: searchMovie},
         success: function (response) {
             $('.container3').html(response);
+            $('.message .close')
+                .on('click', function () {
+                    $(this)
+                        .closest('.message')
+                        .transition('fade')
+                    ;
+                })
+            ;
             // console.log(response);
         },
         error: function (response) {
@@ -53,4 +59,28 @@ $("#searchIcon").on('click', function (e) {
     })
 })
 
-
+// Search Movies by id from Movie Api
+$("#searchBtn").on('click', function (e) {
+    const searchMovie = $(this).prev('#searchMovie').val();
+    // console.log(searchMovie);
+    $.ajax({
+        type: "POST",
+        url: "/search/movie/id",
+        data: {search: searchMovie},
+        success: function (response) {
+            $('.container3').html(response);
+            $('.message .close')
+                .on('click', function () {
+                    $(this)
+                        .closest('.message')
+                        .transition('fade')
+                    ;
+                })
+            ;
+            // console.log(response);
+        },
+        error: function (response) {
+            console.log(response);
+        },
+    })
+})

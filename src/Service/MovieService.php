@@ -11,12 +11,12 @@ class MovieService
 {
     const TOKEN = "1bbadff0";
     const URI = "http://www.omdbapi.com";
-    const QUERY_STRING = '/?t=%s&apikey=%s';
+    const QUERY_STRING = '/?%s=%s&apikey=%s';
 
     /**
      * @throws GuzzleException
      */
-    public function getMovies($movieName): array
+    public function getMovies($movieName, $searchParam): array
     {
         $client = new Client(
             [
@@ -27,7 +27,7 @@ class MovieService
         // Send a request, use self to reference a class variable (constant) or method
         $response = $client->request(
             'GET',
-            sprintf(self::QUERY_STRING, $movieName, self::TOKEN),
+            sprintf(self::QUERY_STRING, $searchParam, $movieName, self::TOKEN),
             [
                 'headers' => [
                     'Authorization' => 'Bearer ',

@@ -18,7 +18,6 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie", name="movie")
      */
-
     public function new(Request $request)
     {
         $movie = new Movie();
@@ -52,7 +51,6 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/edit/{id}", name="edit")
      */
-
     public function edit(Request $request, $id): Response
     {
         $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
@@ -88,7 +86,6 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/delete/{id}", name="delete")
      */
-
     public function delete(Request $request, $id): Response
     {
         $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
@@ -102,7 +99,7 @@ class MovieController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Movie Deleted!');
-//            header("refresh:3;url=../../view/movie");
+
         }
 
         return $this->redirectToRoute('view_movie');

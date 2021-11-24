@@ -21,7 +21,7 @@ class SearchMovieController extends AbstractController
 
 //        $em = $this->getDoctrine()->getManager();
 //        $search = $em->getRepository(Movie::class)->findByTitleField($searchTitle);
-        $search  = $movieRepository ->findByTitleField($searchTitle);
+        $search  = $movieRepository->findByTitleField($searchTitle);
 
         $results = $search->getResult();
 

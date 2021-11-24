@@ -42,14 +42,11 @@ class RentalController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Movie Rented Successfully!');
-//            header("refresh:3;url=view/movie");
         }
 
         return $this->render('rental/index.html.twig', array(
             'RentalForm' => $form->createView(),
             'movie' => $movie
         ));
-
-
     }
 }

@@ -29,7 +29,6 @@ class RegistrationFormType extends AbstractType
                     ]
                 ]
             )
-
             ->add('lastname',
                 TextType::class,
                 [
@@ -39,7 +38,6 @@ class RegistrationFormType extends AbstractType
                     ]
                 ]
             )
-
             ->add(
                 'username',
                 TextType::class,
@@ -50,7 +48,6 @@ class RegistrationFormType extends AbstractType
                     ]
                 ]
             )
-
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -83,8 +80,7 @@ class RegistrationFormType extends AbstractType
                         'placeholder' => 'Confirm Password'
                     ]
                 ],
-            ]);
-        ;
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
