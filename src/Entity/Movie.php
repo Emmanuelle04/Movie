@@ -55,17 +55,12 @@ class Movie
     private $poster;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="movies")
-     */
-    private $category;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $quantity;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $availability;
 
@@ -79,9 +74,15 @@ class Movie
      */
     private $imdbID;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Genre::class, mappedBy="movie_id")
+     */
+    private $genres;
+
     public function __construct()
     {
         $this->rentals = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -137,18 +138,6 @@ class Movie
     public function setPoster($poster)
     {
         $this->poster = $poster;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
     }
 
     public function getQuantity(): ?int
@@ -213,6 +202,36 @@ class Movie
     public function setImdbID($imdbID): self
     {
         $this->imdbID = $imdbID;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+            $genre->setMovieId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        if ($this->genres->removeElement($genre)) {
+            // set the owning side to null (unless already changed)
+            if ($genre->getMovieId() === $this) {
+                $genre->setMovieId(null);
+            }
+        }
 
         return $this;
     }

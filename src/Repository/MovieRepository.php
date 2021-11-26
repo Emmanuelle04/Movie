@@ -32,14 +32,17 @@ class MovieRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByID($movieID): Query
+    public function findByID($movieID)
     {
-        return $this->createQueryBuilder('i')
+        $result = $this->createQueryBuilder('i')
             ->where('i.imdbID = :val')
             ->setParameter('val', $movieID)
             ->getQuery()
+            ->getResult()
             ;
+        return ($result > 0) ? $result[0] : null;
     }
+
 
 
     /*

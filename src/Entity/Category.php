@@ -25,13 +25,13 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Movie::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Genre::class, mappedBy="category_id")
      */
-    private $movies;
+    private $genres;
 
     public function __construct()
     {
-        $this->movies = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,33 +52,32 @@ class Category
     }
 
     /**
-     * @return Collection|Movie[]
+     * @return Collection|Genre[]
      */
-    public function getMovies(): Collection
+    public function getGenres(): Collection
     {
-        return $this->movies;
+        return $this->genres;
     }
 
-    public function addMovie(Movie $movie): self
+    public function addGenre(Genre $genre): self
     {
-        if (!$this->movies->contains($movie)) {
-            $this->movies[] = $movie;
-            $movie->setCategory($this);
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+            $genre->setCategoryId($this);
         }
 
         return $this;
     }
 
-    public function removeMovie(Movie $movie): self
+    public function removeGenre(Genre $genre): self
     {
-        if ($this->movies->removeElement($movie)) {
+        if ($this->genres->removeElement($genre)) {
             // set the owning side to null (unless already changed)
-            if ($movie->getCategory() === $this) {
-                $movie->setCategory(null);
+            if ($genre->getCategoryId() === $this) {
+                $genre->setCategoryId(null);
             }
         }
 
         return $this;
     }
-
 }

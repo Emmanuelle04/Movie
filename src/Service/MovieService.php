@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Category;
 use App\Entity\Movie;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -41,6 +42,7 @@ class MovieService
     // Get Movies from API
     /**
      * @throws GuzzleException
+     * @throws Exception
      */
     public function getMovies($movieName, $searchParam): array
     {
@@ -64,16 +66,19 @@ class MovieService
             ->getBody()
             ->getContents();
 
-
         // Casting - convert a variable to array
         $movieDetails = (array)json_decode($response);
 
+        if ($movieDetails['Response'] == 'False') {
+            throw new Exception();
+        }
+
         if ($movieDetails)
-        // Associative array - key and value (Ex: Genre and Action)
-        $movieDetails['Genre'] = explode(
-            ',',
-            $movieDetails['Genre']
-        );
+            // Associative array - key and value (Ex: Genre and Action)
+            $movieDetails['Genre'] = explode(
+                ',',
+                $movieDetails['Genre']
+            );
 
         return $movieDetails;
     }
@@ -81,21 +86,29 @@ class MovieService
     /**
      * @param $movieID
      * @param $searchParam
-     * @return array
      * @throws GuzzleException
      * @throws Exception
      */
-    public function processMovie($movieID, $searchParam): array
+    public function processMovie($movieID, $searchParam)
     {
-        if ($film = $this->fetchMovieDetails($movieID, $searchParam)) {
-            throw new Exception('Movie not found');
-        }
-
+        // Check if movie exist in database
         if ($this->checkIfMovieExists($movieID)) {
-            throw new Exception('Movie in database detected, exiting');
+            $result = $this->updateMovie($movieID);
+//            throw new Exception('Movie already exist in database');
+        } else {
+            // If movie does not exist, call movie API
+            try {
+                $film = $this->fetchMovieDetails($movieID, $searchParam);
+
+            } catch (Exception $exception) {
+
+                throw new Exception($exception->getMessage());
+            }
+
+            // Save movie in database
+            $result = $this->saveMovie($film);
         }
-        $this->saveMovie($film);
-        return $film;
+        return $result;
     }
 
     /**
@@ -104,14 +117,14 @@ class MovieService
      * @return array
      * @throws Exception|GuzzleException
      */
-    private function fetchMovieDetails($movieID, $searchParam): array
+    public function fetchMovieDetails($movieID, $searchParam): array
     {
         try {
             // Calling movie api service
             return $this
                 ->getMovies($movieID, $searchParam);
         } catch (Exception $exception) {
-            throw new Exception('Movie Details fetched from api failed, exit command');
+            throw new Exception('Movie Details fetched from api failed');
         }
     }
 
@@ -119,24 +132,23 @@ class MovieService
      * @param $movieID
      * @return bool
      */
-    private function checkIfMovieExists($movieID): bool
+    public function checkIfMovieExists($movieID): bool
     {
         return !empty(
         $this
             ->em
             ->getRepository(Movie::class)
             ->findByID($movieID)
-            ->getResult()
         );
     }
 
     /**
      * @param $film
-     * @return void
      */
-    private function saveMovie($film): void
+    public function saveMovie($film): Movie
     {
         $movie = new Movie();
+
         $date = \DateTime::createFromFormat(
             'd M Y',
             $film['Released']
@@ -150,10 +162,17 @@ class MovieService
         $posterName = $this->saveImage($film);
 
         $movie->setPoster($posterName);
+        foreach($film['Genre'] as $genre) {
+            $cat = new Category();
+            $cat->setName($genre);
+            $this->em->persist($cat);
+            $movie->setCategory($cat);
+        }
 
         $this->em->persist($movie);
         $this->em->flush();
 
+        return $movie;
     }
 
     /**
@@ -176,13 +195,52 @@ class MovieService
         fwrite($fp, $content);
         fclose($fp);
 
-        return $posterName;
+        return "/public/uploads/poster/" . $posterName;
     }
 
-    private function updateMovie()
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function updateMovie($movieID)
     {
+            $result = $this
+                ->em
+                ->getRepository(Movie::class)
+                ->findByID($movieID);
 
+                try {
+                    $film = $this->fetchMovieDetails($movieID, 'i');
+
+//                    dd(setTitle($film['Title']));
+                    $date = \DateTime::createFromFormat(
+                        'd M Y',
+                        $film['Released']
+                    );
+                    $result->setTitle($film['Title']);
+                    $result->setDescription($film['Plot']);
+                    $result->setProducer($film['Director']);
+                    $result->setReleasedDate($date);
+                    $result->setImdbID($film['imdbID']);
+
+                    $posterName = $this->saveImage($film);
+
+                    $result->setPoster($posterName);
+
+                    foreach($film['Genre'] as $genre) {
+                        $cat = new Category();
+                        $cat->setName($genre);
+                        $this->em->persist($cat);
+                        $result->setCategory($cat);
+                    }
+
+
+                    $this->em->persist($result);
+                    $this->em->flush();
+
+                    return $result;
+                } catch (Exception $exception) {
+                    throw new Exception($exception->getMessage());
+                }
     }
-
-
 }

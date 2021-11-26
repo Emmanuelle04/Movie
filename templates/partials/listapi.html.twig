@@ -32,7 +32,7 @@
 
 {#                      for loop outside  to separate the 3 labels#}
                         <div class="meta">
-                            {% for x in data.Genre %}
+                            {% for x in data.category.name %}
                                 <a class="ui blue image label">
                                     {{ x }}
                                 </a>
@@ -42,25 +42,25 @@
                         <div class="ui divider"></div>
 
                         <div class="meta">
-                            <span class="category"> {{ data.Released }}</span>
+                            <span class="category"> {{ data.releasedDate|date('Y-m-d') }}</span>
                         </div>
 
                         <div class="ui divider"></div>
 
                         <div class="meta">
-                            <span class="category"> {{ data.Runtime }}</span>
+{#                            <span class="category"> {{ data.Runtime }}</span>#}
                         </div>
 
                         <div class="ui divider"></div>
 
                         <div class="meta">
-                            <span class="category"> {{ data.Director }}</span>
+{#                            <span class="category"> {{ data.Director }}</span>#}
                         </div>
 
                         <div class="ui divider"></div>
 
                         <div class="meta">
-                            <span class="category"> {{ data.Plot }}</span>
+{#                            <span class="category"> {{ data.Plot }}</span>#}
                         </div>
 
                     </div>

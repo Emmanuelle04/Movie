@@ -127,9 +127,9 @@ class MovieSynchroniseCommand extends Command
             return true;
         }
 
-//        foreach ($this->movieList as $movieID) {
-//           $this->processMovie($output, $movieID, $searchParam);
-//        }
+        foreach ($this->movieList as $movieID) {
+           $this->movieService->processMovie($movieID, $searchParam);
+        }
 
         return true;
     }
