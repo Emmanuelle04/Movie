@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,15 +33,18 @@ class MovieRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     public function findByID($movieID)
     {
-        $result = $this->createQueryBuilder('i')
+        return $this->createQueryBuilder('i')
             ->where('i.imdbID = :val')
             ->setParameter('val', $movieID)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
             ;
-        return ($result > 0) ? $result[0] : null;
+
     }
 
 

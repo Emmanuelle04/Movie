@@ -1009,7 +1009,6 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <column id="281" parent="259" name="date">
       <Position>5</Position>
       <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="282" parent="259" name="poster">
       <Position>6</Position>

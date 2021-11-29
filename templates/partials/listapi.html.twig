@@ -19,7 +19,7 @@
                                 <i class="hotel icon"></i> {{ data.Title }}
                             </div>
 
-                            <img src="{{ data.Poster }}" alt="poster">
+                            <img src="{{ asset('uploads/poster/' ~ (data.getPoster())) }}" alt="poster">
                         </div>
                     </div>
 
@@ -31,13 +31,13 @@
                         <div class="ui divider"></div>
 
 {#                      for loop outside  to separate the 3 labels#}
-                        <div class="meta">
-                            {% for x in data.category.name %}
-                                <a class="ui blue image label">
-                                    {{ x }}
-                                </a>
-                            {% endfor %}
-                        </div>
+{#                        <div class="meta">#}
+{#                            {% for x in data.category.name %}#}
+{#                                <a class="ui blue image label">#}
+{#                                    {{ x }}#}
+{#                                </a>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
 
                         <div class="ui divider"></div>
 

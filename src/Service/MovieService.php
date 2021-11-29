@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Category;
+use App\Entity\Genre;
 use App\Entity\Movie;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -105,8 +106,9 @@ class MovieService
                 throw new Exception($exception->getMessage());
             }
 
-            // Save movie in database
+            // Save Movie in database
             $result = $this->saveMovie($film);
+
         }
         return $result;
     }
@@ -144,6 +146,7 @@ class MovieService
 
     /**
      * @param $film
+     * @return Movie
      */
     public function saveMovie($film): Movie
     {
@@ -153,6 +156,7 @@ class MovieService
             'd M Y',
             $film['Released']
         );
+
         $movie->setTitle($film['Title']); //Respective entity methods
         $movie->setDescription($film['Plot']);
         $movie->setProducer($film['Director']);
@@ -162,14 +166,33 @@ class MovieService
         $posterName = $this->saveImage($film);
 
         $movie->setPoster($posterName);
+        $this->em->persist($movie);
+        $this->em->flush();
+
         foreach($film['Genre'] as $genre) {
-            $cat = new Category();
-            $cat->setName($genre);
-            $this->em->persist($cat);
-            $movie->setCategory($cat);
+            $category = $this->checkIfCategoryExist($genre);
+
+            if (!$category) {
+                // Insert new category in category table
+                $cat = new Category();
+                $cat->setName(trim($genre));
+                $this->em->persist($cat);
+
+                // Insert in genre table
+                $genre = new Genre();
+                $genre->setCategoryId($cat);
+                $this->em->persist($genre);
+            } else {
+                // Set catID from Category table to catID in genre table
+                $genre = new Genre();
+                $genre->setCategoryId($category);
+            }
+
+            //Set movieID in genre table
+            $genre->setMovieId($movie);
+            $this->em->persist($genre);
         }
 
-        $this->em->persist($movie);
         $this->em->flush();
 
         return $movie;
@@ -195,7 +218,7 @@ class MovieService
         fwrite($fp, $content);
         fclose($fp);
 
-        return "/public/uploads/poster/" . $posterName;
+        return $posterName;
     }
 
     /**
@@ -204,43 +227,60 @@ class MovieService
      */
     public function updateMovie($movieID)
     {
-            $result = $this
-                ->em
-                ->getRepository(Movie::class)
-                ->findByID($movieID);
+        $result = $this
+            ->em
+            ->getRepository(Movie::class)
+            ->findByID($movieID);
 
-                try {
-                    $film = $this->fetchMovieDetails($movieID, 'i');
+            try {
+                $film = $this->fetchMovieDetails($movieID, 'i');
 
-//                    dd(setTitle($film['Title']));
-                    $date = \DateTime::createFromFormat(
-                        'd M Y',
-                        $film['Released']
-                    );
-                    $result->setTitle($film['Title']);
-                    $result->setDescription($film['Plot']);
-                    $result->setProducer($film['Director']);
-                    $result->setReleasedDate($date);
-                    $result->setImdbID($film['imdbID']);
+                $date = \DateTime::createFromFormat(
+                    'd M Y',
+                    $film['Released']
+                );
+                $result->setTitle($film['Title']);
+                $result->setDescription($film['Plot']);
+                $result->setProducer($film['Director']);
+                $result->setReleasedDate($date);
+                $result->setImdbID($film['imdbID']);
 
-                    $posterName = $this->saveImage($film);
+                $posterName = $this->saveImage($film);
 
-                    $result->setPoster($posterName);
+                $result->setPoster($posterName);
+                foreach($film['Genre'] as $genre) {
+                    $cat = new Category();
+                    $cat->setName($genre);
+                    $this->em->persist($cat);
 
-                    foreach($film['Genre'] as $genre) {
-                        $cat = new Category();
-                        $cat->setName($genre);
-                        $this->em->persist($cat);
-                        $result->setCategory($cat);
-                    }
-
-
-                    $this->em->persist($result);
-                    $this->em->flush();
-
-                    return $result;
-                } catch (Exception $exception) {
-                    throw new Exception($exception->getMessage());
+                    $genre = new Genre();
+                    $genre->setCategoryId($cat);
+                    $this->em->persist($genre);
                 }
+
+
+                $this->em->persist($result);
+                $this->em->flush();
+
+                return $result;
+            } catch (Exception $exception) {
+                throw new Exception($exception->getMessage());
+            }
     }
+
+    /**
+     * @param $cat
+     * @return Category|null
+     */
+    public function checkIfCategoryExist($cat):? Category
+    {
+        return
+        $this
+            ->em
+            ->getRepository(Category::class)
+            ->findByCategory($cat)
+            ->getOneOrNullResult()
+        ;
+    }
+
 }

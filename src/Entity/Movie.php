@@ -43,7 +43,7 @@ class Movie
     private $producer;
 
     /**
-     * @ORM\Column(type="date", name="date")
+     * @ORM\Column(type="date", name="date", nullable=true)
      * @Assert\LessThan("today")
      * @Assert\GreaterThan("1950-01-01")
      */
@@ -132,7 +132,7 @@ class Movie
 
     public function setReleasedDate($releasedDate)
     {
-        $this->releasedDate = $releasedDate;
+        $this->releasedDate = $releasedDate === false ? null : $releasedDate;
     }
 
     public function setPoster($poster)
