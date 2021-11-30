@@ -33,7 +33,7 @@ class SearchMovieIDController extends AbstractController
             'data' => []
         ];
 
-        $listTwigName = 'partials/listapi.html.twig';
+        $listTwigName = 'partials/admin/list.html.twig';
 
         if (!empty($movieID)) {
 
@@ -45,7 +45,7 @@ class SearchMovieIDController extends AbstractController
                 return $this->render($listTwigName, $responseData);
             }
 
-            return $this->render('partials/listapi.html.twig', [
+            return $this->render('partials/admin/list.html.twig', [
                 'data' => $results
             ]);
 
@@ -58,7 +58,7 @@ class SearchMovieIDController extends AbstractController
 //            $responseData = [
 //              'data' => []
 //            ];
-//            $listTwigName = 'partials/listapi.html.twig';
+//            $listTwigName = 'partials/admin/list.html.twig';
 //
 //            if ($results) {
 //                $this->addFlash('error', 'Movie already exists');
@@ -78,7 +78,7 @@ class SearchMovieIDController extends AbstractController
         // Movie found save in db
 //            $movieService->saveMovie($results);
 //
-//            return $this->render('partials/listapi.html.twig', [
+//            return $this->render('partials/admin/list.html.twig', [
 //                'data' => $results
 //            ]);
 

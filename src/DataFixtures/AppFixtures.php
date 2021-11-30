@@ -16,9 +16,6 @@ class AppFixtures extends Fixture
     private $categories = [
         'Action',
         'Comedy',
-        'Horror',
-        'Thriller',
-        'Science Fiction'
     ];
 
     /**
@@ -37,7 +34,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
        $this->addCategories($manager);
-//       $this->addAdmin($manager);
+       $this->addAdmin($manager);
 
         $manager->flush();
     }
@@ -59,8 +56,8 @@ class AppFixtures extends Fixture
     {
         $admin = new User();
         $admin->setFirstName('emma');
-        $admin->setLastName('007');
-        $admin->setUsername('emma007');
+        $admin->setLastName('frappier');
+        $admin->setUsername('emma');
         $admin->setPassword(
             $this->hasher->hashPassword(
                 $admin,

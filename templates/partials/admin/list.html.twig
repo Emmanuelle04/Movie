@@ -1,0 +1,73 @@
+{% for message in app.flashes('error') %}
+    <div class="ui error message">
+        <i class="close icon"></i>
+        <div class="header">
+            {{ message }}
+        </div>
+    </div>
+{% endfor %}
+
+{% if data | length > 0 %}
+    <div class="container-fluid" style="margin: auto;">
+        <div class="ui segment">
+            <div class="ui equal width center aligned padded grid" style="margin: auto;">
+                <div class="row">
+
+                    <div class="column image">
+                        <div class="ui image">
+                            <div class="ui blue ribbon label">
+                                <i class="hotel icon"></i> {{ data.Title }}
+                            </div>
+
+                            <img src="{{ asset('uploads/poster/' ~ (data.getPoster())) }}" alt="poster">
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="meta">
+                            <p style="text-align: center;" class="category"> {{ data.Title }}</p>
+                        </div>
+
+                        <div class="ui divider"></div>
+
+{#                        <div class="meta">#}
+{#                            {% for x in data.genres.CategoryId %}#}
+{#                                <a class="ui blue image label">#}
+{#                                    {{ x }}#}
+{#                                </a>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+
+{#                        <div class="ui divider"></div>#}
+
+                        <div class="meta">
+                            <span class="category"> {{ data.releasedDate|date('Y-m-d') }}</span>
+                        </div>
+
+                        <div class="ui divider"></div>
+
+                        <div class="meta">
+                            <span class="category"> {{ data.Producer }}</span>
+                        </div>
+
+                        <div class="ui divider"></div>
+
+                        <div class="meta">
+                            <span class="category"> {{ data.Description }}</span>
+                        </div>
+
+                        <br>
+
+{#                        <div>#}
+{#                            <a href="{{ path('save_movie') }}">#}
+{#                                <button style="width: 100%;" class="ui primary button">Save</button>#}
+{#                            </a>#}
+{#                        </div>#}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

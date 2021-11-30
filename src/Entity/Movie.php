@@ -132,6 +132,7 @@ class Movie
 
     public function setReleasedDate($releasedDate)
     {
+        // if releasedDate is false, releasedDate is null else value is assigned
         $this->releasedDate = $releasedDate === false ? null : $releasedDate;
     }
 

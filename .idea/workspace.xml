@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fb913a8-b858-4c65-aa07-d07ac90cbac4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab57c6d7-b4be-473e-8ce0-77481de87b6c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab57c6d7-b4be-473e-8ce0-77481de87b6c.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/partials/admin/list.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CategoryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CategoryRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/MovieRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MovieRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GenreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GenreRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/MovieService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MovieService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/listapi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/listapi.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/view_movie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/view_movie_details/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie_details/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +265,9 @@
       <workItem from="1637727841222" duration="26827000" />
       <workItem from="1637813778173" duration="21343000" />
       <workItem from="1637899405715" duration="23766000" />
-      <workItem from="1638159586970" duration="520000" />
+      <workItem from="1638159586970" duration="17460000" />
+      <workItem from="1638183746945" duration="3693000" />
+      <workItem from="1638244912624" duration="415000" />
     </task>
     <servers />
   </component>
