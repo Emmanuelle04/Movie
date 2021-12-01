@@ -33,17 +33,17 @@ class Movie
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message = "Description is required.")
+     * @Assert\NotBlank(message = "Plot is required.")
      */
-    private $description;
+    private $plot;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $producer;
+    private $director;
 
     /**
-     * @ORM\Column(type="date", name="date", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      * @Assert\LessThan("today")
      * @Assert\GreaterThan("1950-01-01")
      */
@@ -95,19 +95,19 @@ class Movie
         return $this->title;
     }
 
-    public function getDescription()
+    public function getPlot()
     {
-        return $this->description;
+        return $this->plot;
     }
 
-    public function getProducer()
+    public function getDirector()
     {
-        return $this->producer;
+        return $this->director;
     }
 
     public function getReleasedDate()
     {
-        return $this->releasedDate;
+        return $this->releasedDate->format('Y-m-d');
     }
 
     public function getPoster()
@@ -120,14 +120,14 @@ class Movie
         $this->title = $title;
     }
 
-    public function setDescription($description)
+    public function setPlot($plot)
     {
-        $this->description = $description;
+        $this->plot = $plot;
     }
 
-    public function setProducer($producer)
+    public function setDirector($director)
     {
-        $this->producer = $producer;
+        $this->director = $director;
     }
 
     public function setReleasedDate($releasedDate)

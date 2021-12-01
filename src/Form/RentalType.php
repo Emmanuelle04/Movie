@@ -27,7 +27,7 @@ class RentalType extends AbstractType
                 ]
             )
             ->add(
-                'returnDate',
+                'dueDate',
                 DateType::class,
                 [
                     'widget' => 'single_text',

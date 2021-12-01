@@ -85,3 +85,45 @@ $("#searchBtn").on('click', function (e) {
         },
     })
 })
+
+//Save movie in database
+$(document).on('click', '#saveBtn',  function () {
+    // define array genre
+let genre = [];
+    $( ".meta span.image" ).each(function() {
+        // access element
+        var value = $(this)
+            .text()
+            .replace(/[\n]+/g, "")
+            .trim();
+
+        genre.push(
+            value
+        );
+    })
+
+    const data ={
+        poster: $("#movie-poster").attr('src'),
+        title: $("#movie-title").html(),
+        Genre: genre,
+        released: $("#movie-released").html(),
+        director: $("#movie-director").html(),
+        plot: $("#movie-plot").html(),
+        imdbID: $("#searchMovie").val(),
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/save/movie",
+        data: {
+            movie: data,
+        },
+        success: function (response) {
+            $('.message .close')
+            $('#saveBtn').parent().fadeOut("slow");
+        },
+        error: function (response) {
+            console.log(response);
+        },
+    })
+})

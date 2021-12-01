@@ -2,15 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fb913a8-b858-4c65-aa07-d07ac90cbac4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/partials/admin/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ab57c6d7-b4be-473e-8ce0-77481de87b6c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ab57c6d7-b4be-473e-8ce0-77481de87b6c.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SaveMovieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SaveMovieController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SearchMovieIDController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/GenreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GenreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Rental.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Rental.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/MovieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MovieType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RentalType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RentalType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/MovieService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MovieService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/admin/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/admin/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/listapi.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/listapi.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/view_movie/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/view_movie_details/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_movie_details/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/view_rentals/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_rentals/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +274,9 @@
       <workItem from="1637899405715" duration="23766000" />
       <workItem from="1638159586970" duration="17460000" />
       <workItem from="1638183746945" duration="3693000" />
-      <workItem from="1638244912624" duration="415000" />
+      <workItem from="1638244912624" duration="7589000" />
+      <workItem from="1638252624654" duration="148000" />
+      <workItem from="1638252787859" duration="15582000" />
     </task>
     <servers />
   </component>

@@ -36,7 +36,6 @@ class SearchMovieIDController extends AbstractController
         $listTwigName = 'partials/admin/list.html.twig';
 
         if (!empty($movieID)) {
-
             try {
                 $results = $movieService->processMovie($movieID, 'i');
             } catch (Exception $exception) {
@@ -48,39 +47,9 @@ class SearchMovieIDController extends AbstractController
             return $this->render('partials/admin/list.html.twig', [
                 'data' => $results
             ]);
-
         }
+
         return $this->render('search_movie_id/index.html.twig');
-
-
-        // Check if movie exists in database
-//            $results = $movieService->checkIfMovieExists($movieID);
-//            $responseData = [
-//              'data' => []
-//            ];
-//            $listTwigName = 'partials/admin/list.html.twig';
-//
-//            if ($results) {
-//                $this->addFlash('error', 'Movie already exists');
-//
-//                return $this->render($listTwigName, $responseData);
-//            }
-//
-//            // Movie does not exist, call api
-//            try {
-//                $results = $movieService->fetchMovieDetails($movieID, 'i');
-//            } catch (Exception $exception) {
-//                $this->addFlash('error', $exception->getMessage());
-//
-//                return $this->render($listTwigName, $responseData);
-//            }
-
-        // Movie found save in db
-//            $movieService->saveMovie($results);
-//
-//            return $this->render('partials/admin/list.html.twig', [
-//                'data' => $results
-//            ]);
 
     }
 }

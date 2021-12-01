@@ -12,13 +12,13 @@
             <tr>
                 <th>ID</th>
                 <th>Rental Date</th>
-                <th>Return Date</th>
+                <th>Due Date</th>
             </tr>
             {% for x in data %}
                 <tr>
                     <td>{{ x.id }}</td>
                     <td>{{ x.rentalDate.format('d/m/Y') }}</td>
-                    <td>{{ x.returnDate.format('d/m/Y') }}</td>
+                    <td>{{ x.dueDate.format('d/m/Y') }}</td>
                 </tr>
             {% endfor %}
         </table>

@@ -35,20 +35,20 @@ class MovieType extends AbstractType
                 'placeholder' => 'Select Category'
             ])
             ->add(
-                'description',
+                'plot',
                 TextareaType::class,
                 [
                     'attr' => [
-                        'placeholder' => 'Description'
+                        'placeholder' => 'Plot'
                     ]
                 ]
             )
             ->add(
-                'Producer',
+                'director',
                 TextType::class,
                 [
                     'attr' => [
-                        'placeholder' => 'Producer'
+                        'placeholder' => 'Director'
                     ]
                 ]
             )

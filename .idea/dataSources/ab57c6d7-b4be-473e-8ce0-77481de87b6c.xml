@@ -996,17 +996,17 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="279" parent="259" name="description">
+    <column id="279" parent="259" name="plot">
       <Position>3</Position>
       <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="280" parent="259" name="producer">
+    <column id="280" parent="259" name="director">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="281" parent="259" name="date">
+    <column id="281" parent="259" name="released_date">
       <Position>5</Position>
       <DataType>date|0s</DataType>
     </column>
@@ -1053,7 +1053,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="291" parent="260" name="return_date">
+    <column id="291" parent="260" name="due_date">
       <Position>5</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>

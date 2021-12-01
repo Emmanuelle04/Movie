@@ -89,30 +89,25 @@ class MovieService
     /**
      * @param $movieID
      * @param $searchParam
-     * @return bool
+     * @return mixed
      * @throws GuzzleException
      * @throws Exception
      */
-    public function processMovie($movieID, $searchParam): bool
+    public function processMovie($movieID, $searchParam)
     {
         // Check if movie exist in database
         if ($this->checkIfMovieExists($movieID)) {
 
             // If movie exists, update movie
-            $result = $this->updateMovie($movieID);
+            return $this->updateMovie($movieID);
         } else {
-
             // If movie does not exist, call movie API
             try {
-                $film = $this->fetchMovieDetails($movieID, $searchParam);
-
+                return $this->fetchMovieDetails($movieID, $searchParam);
             } catch (Exception $exception) {
                 throw new Exception($exception->getMessage());
             }
-            // Save Movie in database
-//            $result = $this->saveMovie($film);
         }
-        return true;
     }
 
     /**
@@ -154,20 +149,22 @@ class MovieService
      * @param $film
      * @return Movie
      */
-    public function saveMovie($film): Movie
+    public function saveMovie($film, $imdbID = null): Movie
     {
         $movie = new Movie();
 
         $date = \DateTime::createFromFormat(
             'd M Y',
-            $film['Released']
+            $film['released']
         );
 
-        $movie->setTitle($film['Title']); //Respective entity methods
-        $movie->setDescription($film['Plot']);
-        $movie->setProducer($film['Director']);
+        $movie->setTitle($film['title']); //Respective entity methods
+        $movie->setPlot($film['plot']);
+        $movie->setDirector($film['director']);
         $movie->setReleasedDate($date);
         $movie->setImdbID($film['imdbID']);
+
+
 
         $posterName = $this->saveImage($film);
 
@@ -247,8 +244,8 @@ class MovieService
                 $film['Released']
             );
             $result->setTitle($film['Title']);
-            $result->setDescription($film['Plot']);
-            $result->setProducer($film['Director']);
+            $result->setPlot($film['Plot']);
+            $result->setDirector($film['Director']);
             $result->setReleasedDate($date);
             $result->setImdbID($film['imdbID']);
 
@@ -314,5 +311,4 @@ class MovieService
                 ->getRepository(Genre::class)
                 ->findByGenre($movieID, $category);
     }
-
 }

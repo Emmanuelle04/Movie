@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\RentalRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 /**
  * @ORM\Entity(repositoryClass=RentalRepository::class)
@@ -25,7 +27,7 @@ class Rental
     /**
      * @ORM\Column(type="date")
      */
-    private $returnDate;
+    private $dueDate;
 
     /**
      * @ORM\ManyToOne(targetEntity=Movie::class, inversedBy="rentals")
@@ -44,12 +46,12 @@ class Rental
         return $this->id;
     }
 
-    public function getRentalDate(): ?\DateTimeInterface
+    public function getRentalDate(): ?DateTimeInterface
     {
         return $this->rentalDate;
     }
 
-    public function setRentalDate(\DateTimeInterface $rentalDate): self
+    public function setRentalDate(DateTimeInterface $rentalDate): self
     {
         $this->rentalDate = $rentalDate;
 
@@ -57,22 +59,21 @@ class Rental
     }
 
     /**
-     * @return \DateTimeInterface|null
-     * @throws \Exception
+     * @return DateTimeInterface|null
+     * @throws Exception
      */
-    public function getReturnDate(): ?\DateTimeInterface
+    public function getDueDate(): ?DateTimeInterface
     {
-        return $this->returnDate;
+        return $this->dueDate;
     }
 
     /**
-     * @param \DateTimeInterface $returnDate
+     * @param DateTimeInterface $dueDate
      * @return $this
-     * @throws \Exception
      */
-    public function setReturnDate(\DateTimeInterface $returnDate): self
+    public function setDueDate(DateTimeInterface $dueDate): self
     {
-        $this->returnDate = $returnDate;
+        $this->dueDate = $dueDate;
 
         return $this;
     }

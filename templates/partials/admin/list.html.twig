@@ -8,6 +8,7 @@
 {% endfor %}
 
 {% if data | length > 0 %}
+
     <div class="container-fluid" style="margin: auto;">
         <div class="ui segment">
             <div class="ui equal width center aligned padded grid" style="margin: auto;">
@@ -19,50 +20,55 @@
                                 <i class="hotel icon"></i> {{ data.Title }}
                             </div>
 
-                            <img src="{{ asset('uploads/poster/' ~ (data.getPoster())) }}" alt="poster">
+                            <img id="movie-poster" src="{{ data.Poster }}" alt="poster">
+
                         </div>
                     </div>
 
                     <div class="column">
                         <div class="meta">
-                            <p style="text-align: center;" class="category"> {{ data.Title }}</p>
-                        </div>
-
-                        <div class="ui divider"></div>
-
-{#                        <div class="meta">#}
-{#                            {% for x in data.genres.CategoryId %}#}
-{#                                <a class="ui blue image label">#}
-{#                                    {{ x }}#}
-{#                                </a>#}
-{#                            {% endfor %}#}
-{#                        </div>#}
-
-{#                        <div class="ui divider"></div>#}
-
-                        <div class="meta">
-                            <span class="category"> {{ data.releasedDate|date('Y-m-d') }}</span>
+                            <p id="movie-title" style="text-align: center;" class="category">{{ data.Title }}</p>
                         </div>
 
                         <div class="ui divider"></div>
 
                         <div class="meta">
-                            <span class="category"> {{ data.Producer }}</span>
+                            <p id="movie-title" style="text-align: center;" class="category">{{ data.imdbID }}</p>
                         </div>
 
                         <div class="ui divider"></div>
 
                         <div class="meta">
-                            <span class="category"> {{ data.Description }}</span>
+                            {% for x in data.Genre %}
+                                <span class="ui blue image label">
+                                    {{ x }}
+                                </span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="ui divider"></div>
+
+                        <div class="meta">
+                            <span id="movie-released" class="category"> {{ data.Released }}</span>
+                        </div>
+
+                        <div class="ui divider"></div>
+                        {# #}
+                        <div class="meta">
+                            <span id="movie-director" class="category"> {{ data.Director }}</span>
+                        </div>
+
+                        <div class="ui divider"></div>
+
+                        <div class="meta">
+                            <span id="movie-plot" class="category"> {{ data.Plot }}</span>
                         </div>
 
                         <br>
 
-{#                        <div>#}
-{#                            <a href="{{ path('save_movie') }}">#}
-{#                                <button style="width: 100%;" class="ui primary button">Save</button>#}
-{#                            </a>#}
-{#                        </div>#}
+                        <div>
+                            <button id="saveBtn" style="width: 100%;" class="ui primary button">Save</button>
+                        </div>
 
                     </div>
 
