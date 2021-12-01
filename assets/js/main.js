@@ -91,12 +91,13 @@ $(document).on('click', '#saveBtn',  function () {
     // define array genre
 let genre = [];
     $( ".meta span.image" ).each(function() {
-        // access element
-        var value = $(this)
+        // access element, access text inside element, replace \n by "", remove white space
+        let value = $(this)
             .text()
             .replace(/[\n]+/g, "")
             .trim();
 
+        // insert value in array
         genre.push(
             value
         );

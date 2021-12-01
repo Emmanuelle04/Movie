@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\Genre;
 use App\Entity\Movie;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use GuzzleHttp\Client;
@@ -148,23 +149,20 @@ class MovieService
     /**
      * @param $film
      * @return Movie
+     * @throws Exception
      */
     public function saveMovie($film, $imdbID = null): Movie
     {
         $movie = new Movie();
 
-        $date = \DateTime::createFromFormat(
-            'd M Y',
-            $film['released']
-        );
+        $date = new DateTime($film['released']);
+        $date->format('d M Y');
 
         $movie->setTitle($film['title']); //Respective entity methods
         $movie->setPlot($film['plot']);
         $movie->setDirector($film['director']);
         $movie->setReleasedDate($date);
         $movie->setImdbID($film['imdbID']);
-
-
 
         $posterName = $this->saveImage($film);
 
@@ -208,13 +206,13 @@ class MovieService
      */
     private function saveImage($film): string
     {
-        if (empty($film['Poster'])) {
+        if (empty($film['poster'])) {
             return 'not_found.png';
         }
 
         $posterName = uniqid() . '.jpg';
 
-        $content = file_get_contents($film['Poster']);
+        $content = file_get_contents($film['poster']);
         $fp = fopen(
             $this->parameterBag->get('kernel.project_dir') . "/public/uploads/poster/" . $posterName,
             "w"

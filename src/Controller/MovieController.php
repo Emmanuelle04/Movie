@@ -11,14 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-
-
 class MovieController extends AbstractController
 {
     /**
      * @Route("/movie", name="movie")
      */
-    public function new(Request $request)
+    public function newMovie(Request $request): Response
     {
         $movie = new Movie();
 
@@ -51,7 +49,7 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/edit/{id}", name="edit")
      */
-    public function edit(Request $request, $id): Response
+    public function editMovie(Request $request, $id): Response
     {
         $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
 
@@ -77,7 +75,6 @@ class MovieController extends AbstractController
             $this->addFlash('success', 'Movie Edited!');
             header("refresh:3;url=../../view/movie");
         }
-
         return $this->render('movie/editmovie.html.twig', array(
             'MovieForm' => $form->createView(),
         ));
@@ -86,7 +83,7 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/delete/{id}", name="delete")
      */
-    public function delete(Request $request, $id): Response
+    public function deleteMovie(Request $request, $id): Response
     {
         $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
 
@@ -101,9 +98,10 @@ class MovieController extends AbstractController
             $this->addFlash('success', 'Movie Deleted!');
 
         }
-
         return $this->redirectToRoute('view_movie');
     }
+
+
 
 }
 

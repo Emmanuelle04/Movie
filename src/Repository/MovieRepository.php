@@ -47,8 +47,6 @@ class MovieRepository extends ServiceEntityRepository
 
     }
 
-
-
     /*
     public function findOneBySomeField($value): ?Movie
     {

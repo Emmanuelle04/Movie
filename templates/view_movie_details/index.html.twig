@@ -17,19 +17,20 @@
                     <p style="text-align: center;" class="category"> {{ data.title }}</p>
                 </div>
 
-{#                <div class="ui divider"></div>#}
-
-{#                <div class="meta">#}
-{#                    <a class="ui blue image label">#}
-{#                        {{ data.category.name }}#}
-{#                    </a>#}
-{#                </div>#}
-
-
                 <div class="ui divider"></div>
 
                 <div class="meta">
-                    <span class="category"> {{ data.releasedDate.format('d/m/Y') }}</span>
+                    {% for category in data |getCategories %}
+                    <a class="ui blue image label">
+                            {{ category }}
+                    </a>
+                    {% endfor %}
+                </div>
+                
+                <div class="ui divider"></div>
+
+                <div class="meta">
+                    <span class="category"> {{ data.releasedDate }}</span>
                 </div>
 
                 <div class="ui divider"></div>
